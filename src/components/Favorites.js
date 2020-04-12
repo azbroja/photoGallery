@@ -6,16 +6,9 @@ const Images = (props) => {
 
   return (
     <>
-      <p>{props.images}</p>
-      {props.images.map((image) => (
-        <p key={image.id}>
-          <img
-            src={image.urls.small}
-            alt={image.urls.small}
-            onClick={props.handleAddToFavorites}
-          />
-        </p>
-      ))}
+      <p>
+        <img src={props.images} alt={props.images} />
+      </p>
     </>
   );
 };

@@ -8,7 +8,7 @@ import Images from "./components/Images";
 function App() {
   const [search, setSearch] = useState("");
   const [favorites, setFavorites] = useState(
-    localStorage.getItem("images") || []
+    localStorage.getItem("images") || {}
   );
 
   const handleOnClick = (e) => {
@@ -16,7 +16,9 @@ function App() {
   };
 
   const handleAddToFavorites = (e) => {
+    console.log(favorites);
     localStorage.setItem("images", JSON.stringify(e.target.src));
+
     setFavorites(e.target.src);
   };
 
