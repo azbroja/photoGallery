@@ -7,7 +7,11 @@ const Images = (props) => {
   return (
     <>
       <p>
-        <img src={props.images} alt={props.images} />
+        {images.map((image) => (
+          <p key={image.id}>
+            <img src={image} alt={image} />
+          </p>
+        ))}
       </p>
     </>
   );
