@@ -8,8 +8,8 @@ const Images = (props) => {
     <>
       <p>
         {images.map((image) => (
-          <p key={image.id}>
-            <img src={image} alt={image} />
+          <p key={image.index}>
+            <img src={image} alt={image} onClick={props.handleOnRemove} />
           </p>
         ))}
       </p>

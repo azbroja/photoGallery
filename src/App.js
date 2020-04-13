@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
-import SearchBar from "./components/SearchBar";
 import Favorites from "./components/Favorites";
+import Navigation from "./components/Navigation";
 
 import Images from "./components/Images";
 
@@ -17,22 +18,51 @@ function App() {
     setSearch(e.target.value);
   };
 
+  const handleOnRemove = (e) => {
+    console.log(e.target.src);
+    const deleteIndex = images.indexOf(e.target.src);
+
+    imagesSend = images.splice(deleteIndex, 1);
+    localStorage.setItem("images", JSON.stringify(imagesSend));
+    console.log(images);
+  };
+
   const handleAddToFavorites = (e) => {
     console.log(images);
     imagesSend.push(e.target.src);
     console.log(images);
 
     localStorage.setItem("images", JSON.stringify(imagesSend));
-
-    setFavorites(e.target.src);
   };
 
   return (
     <>
-      <SearchBar handleOnClick={handleOnClick} />
-      <Images handleAddToFavorites={handleAddToFavorites} value={search} />
-      Favorites
-      <Favorites images={favorites} />
+      <BrowserRouter>
+        <Navigation />
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <Images
+              {...props}
+              handleAddToFavorites={handleAddToFavorites}
+              handleOnClick={handleOnClick}
+              value={search}
+            />
+          )}
+        />
+        <Route
+          path="/favorites"
+          exact
+          render={(props) => (
+            <Favorites
+              {...props}
+              images={favorites}
+              handleOnRemove={handleOnRemove}
+            />
+          )}
+        />
+      </BrowserRouter>
     </>
   );
 }

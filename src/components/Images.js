@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import SearchBar from "./SearchBar";
 
 const Images = (props) => {
   const [images, setImages] = useState([]);
@@ -20,7 +21,7 @@ const Images = (props) => {
 
   return (
     <>
-      <p>{props.value}</p>
+      <SearchBar handleOnClick={props.handleOnClick} />
 
       {images.map((image) => (
         <p key={image.id}>
